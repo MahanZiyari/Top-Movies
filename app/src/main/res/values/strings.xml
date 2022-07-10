@@ -18,4 +18,5 @@
     <string name="summary">Summary</string>
     <string name="writers">Writers</string>
     <string name="actors">Actors</string>
+    <string name="app_logo">App Logo</string>
 </resources>
