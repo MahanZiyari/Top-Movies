@@ -1,4 +1,4 @@
-package mahan.topmovies
+package mahan.topmovies.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
