@@ -15,21 +15,20 @@
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/bottomNav"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_main" />
+        app:navGraph="@navigation/nav_main"/>
 
 
     <!-- BottomNavigation View-->
     <!-- Responsible for navigating between home, search and favorite screens-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
-        app:menu="@menu/menu_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:backgroundTint="@color/chineseBlack"
         app:itemIconTint="@color/color_bottom_nav"
         app:itemTextColor="@color/color_bottom_nav"
         app:labelVisibilityMode="selected"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:menu="@menu/menu_main" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
