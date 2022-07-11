@@ -19,4 +19,11 @@
         <item name="android:textColor">@color/white</item>
         <item name="fontFamily">sans-serif-light</item>
     </style>
+
+    <style name="CustomFilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="startIconTint">@color/crayola</item>
+        <item name="hintTextColor">@color/philippineSilver</item>
+        <item name="boxStrokeColor">@color/crayola</item>
+        <item name="boxBackgroundColor">@color/gunmetal</item>
+    </style>
 </resources>
