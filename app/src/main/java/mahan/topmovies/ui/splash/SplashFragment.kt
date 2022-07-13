@@ -43,7 +43,7 @@ class SplashFragment : Fragment() {
                     findNavController().navigate(R.id.actionSplashToRegister)
                 } else {
                     // User has registered before
-                    findNavController().navigate(R.id.actionSplashToHome)
+                    findNavController().navigate(R.id.actionToHome)
                 }
             }
         }
