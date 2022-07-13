@@ -6,9 +6,11 @@ import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import dagger.hilt.android.AndroidEntryPoint
 import mahan.topmovies.R
 import mahan.topmovies.databinding.ActivityMainBinding
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     // Binding Object
     private lateinit var binding: ActivityMainBinding
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
             // with this code we can determine in which fragment bottomNavigation should be visible
             navController.addOnDestinationChangedListener{ _, destination, _ ->
-                if (destination.id == R.id.splashFragment) {
+                if (destination.id == R.id.splashFragment || destination.id == R.id.registerFragment) {
                     bottomNav.visibility = View.GONE
                 } else {
                     bottomNav.visibility = View.VISIBLE
