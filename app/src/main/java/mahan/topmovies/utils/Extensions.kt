@@ -1,6 +1,7 @@
 package mahan.topmovies.utils
 
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 
 fun View.showInvisible(isShown: Boolean) {
     if (isShown) {
@@ -8,4 +9,12 @@ fun View.showInvisible(isShown: Boolean) {
     } else {
         this.visibility = View.INVISIBLE
     }
+}
+
+fun RecyclerView.initialize(
+    layoutManager: RecyclerView.LayoutManager,
+    adapter: RecyclerView.Adapter<*>,
+) {
+    this.layoutManager = layoutManager
+    this.adapter = adapter
 }
