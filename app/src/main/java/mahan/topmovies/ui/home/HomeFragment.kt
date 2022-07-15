@@ -31,6 +31,7 @@ class HomeFragment : Fragment() {
     // Other
     val viewModel by viewModels<HomeViewModel>()
 
+
     // SnapPager helper for scrolling only one item in RecyclerView
     private val pagerSnapHelper by lazy { PagerSnapHelper() }
 
