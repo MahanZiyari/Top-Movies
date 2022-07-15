@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import dagger.hilt.android.AndroidEntryPoint
 import mahan.topmovies.databinding.FragmentHomeBinding
 import mahan.topmovies.ui.home.adapters.GenresAdapter
+import mahan.topmovies.ui.home.adapters.LastMoviesAdapter
 import mahan.topmovies.ui.home.adapters.TopMoviesAdapter
 import mahan.topmovies.utils.initialize
+import mahan.topmovies.utils.showInvisible
 import mahan.topmovies.viewmodel.HomeViewModel
 import javax.inject.Inject
 
@@ -28,6 +30,9 @@ class HomeFragment : Fragment() {
     @Inject
     lateinit var genresAdapter: GenresAdapter
 
+    @Inject
+    lateinit var moviesAdapter: LastMoviesAdapter
+
     // Other
     val viewModel by viewModels<HomeViewModel>()
 
@@ -39,6 +44,7 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         viewModel.loadTopMoviesList(3)
         viewModel.loadGenresList()
+        viewModel.loadLastMovies()
     }
 
     override fun onCreateView(
@@ -54,11 +60,25 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+
+            //Loading
+            viewModel.loading.observe(viewLifecycleOwner) {
+                if (it) {
+                    moviesLoading.showInvisible(true)
+                    movieScrollLay.showInvisible(false)
+                } else {
+                    moviesLoading.showInvisible(false)
+                    movieScrollLay.showInvisible(true)
+                }
+            }
+
             // Get Top Movies
             viewModel.topMoviesList.observe(viewLifecycleOwner) {
                 topMoviesAdapter.differ.submitList(it.data)
                 topMoviesRecycler.initialize(
-                    layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+                    layoutManager = LinearLayoutManager(requireContext(),
+                        LinearLayoutManager.HORIZONTAL,
+                        false),
                     adapter = topMoviesAdapter
                 )
                 pagerSnapHelper.attachToRecyclerView(topMoviesRecycler)
@@ -66,11 +86,23 @@ class HomeFragment : Fragment() {
                 topMoviesIndicator.attachToRecyclerView(topMoviesRecycler, pagerSnapHelper)
             }
 
-            viewModel.genresList.observe(viewLifecycleOwner){
+            // Loading list of genres
+            viewModel.genresList.observe(viewLifecycleOwner) {
                 genresAdapter.differ.submitList(it)
                 genresRecycler.initialize(
-                    layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+                    layoutManager = LinearLayoutManager(requireContext(),
+                        LinearLayoutManager.HORIZONTAL,
+                        false),
                     adapter = genresAdapter
+                )
+            }
+
+            // Loading list of last movies
+            viewModel.lastMoviesList.observe(viewLifecycleOwner) {
+                moviesAdapter.submitNewList(it.data)
+                lastMoviesRecycler.initialize(
+                    layoutManager = LinearLayoutManager(requireContext()),
+                    adapter = moviesAdapter
                 )
             }
         }

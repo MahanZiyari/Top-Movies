@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <!--Base Layout of screen-->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/movieScrollLay"
         android:layout_width="match_parent"
@@ -34,6 +35,35 @@
                     android:layout_height="@dimen/_10mdp"
                     android:layout_marginTop="@dimen/_10mdp"
                     app:layout_constraintTop_toBottomOf="@id/topMoviesRecycler" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--last movies-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/lastMoviesLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                app:layout_constraintTop_toBottomOf="@id/genresLay">
+                <!--Title-->
+                <TextView
+                    android:id="@+id/lastMoviesTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10mdp"
+                    android:text="@string/lastMovies"
+                    android:textColor="@color/crayola"
+                    android:textSize="@dimen/_12font_mdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <!--Recycler-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/lastMoviesRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_5mdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lastMoviesTitle" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -69,4 +99,16 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <!--Loading State-->
+    <ProgressBar
+        android:id="@+id/moviesLoading"
+        android:layout_width="@dimen/_20mdp"
+        android:layout_height="@dimen/_20mdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,4 +6,5 @@ import javax.inject.Inject
 class HomeRepository @Inject constructor(private val apiServices: ApiServices) {
     suspend fun topMoviesList(id: Int) = apiServices.moviesTopList(id)
     suspend fun genresList() = apiServices.genresList()
+    suspend fun lastMovies() = apiServices.moviesLastList()
 }
