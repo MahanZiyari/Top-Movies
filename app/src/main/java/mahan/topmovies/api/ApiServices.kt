@@ -1,5 +1,6 @@
 package mahan.topmovies.api
 
+import mahan.topmovies.model.home.ResponseGenresList
 import mahan.topmovies.model.home.ResponseMoviesList
 import mahan.topmovies.model.register.BodyRegister
 import mahan.topmovies.model.register.ResponseRegister
@@ -16,4 +17,8 @@ interface ApiServices {
 
     @GET("genres/{genre_id}/movies")
     suspend fun moviesTopList(@Path("genre_id") id: Int): Response<ResponseMoviesList>
+
+    @GET("genres")
+    suspend fun genresList(): Response<ResponseGenresList>
+
 }
