@@ -5,10 +5,7 @@ import mahan.topmovies.model.home.ResponseMoviesList
 import mahan.topmovies.model.register.BodyRegister
 import mahan.topmovies.model.register.ResponseRegister
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ApiServices {
     // Responsible for registering user in server
@@ -23,6 +20,9 @@ interface ApiServices {
 
     @GET("movies")
     suspend fun moviesLastList(): Response<ResponseMoviesList>
+
+    @GET("movies")
+    suspend fun searchMovie(@Query("q") name: String): Response<ResponseMoviesList>
 
 
 }
