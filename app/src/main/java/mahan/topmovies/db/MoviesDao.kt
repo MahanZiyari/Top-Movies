@@ -1,4 +1,5 @@
-import academy.nouri.s1_project.db.MovieEntity
+package mahan.topmovies.db
+
 import androidx.room.*
 import mahan.topmovies.utils.Constants
 

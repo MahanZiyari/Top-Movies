@@ -6,6 +6,8 @@
         <entry key="..\:/Programming/AndroidStudioProjects/TopMovies/app/src/main/res/drawable/bg_rounded_dark.xml" value="0.127" />
         <entry key="..\:/Programming/AndroidStudioProjects/TopMovies/app/src/main/res/drawable/shadow.xml" value="0.127" />
         <entry key="..\:/Programming/AndroidStudioProjects/TopMovies/app/src/main/res/layout/activity_main.xml" value="0.2368659420289855" />
+        <entry key="..\:/Programming/AndroidStudioProjects/TopMovies/app/src/main/res/layout/fragment_detail.xml" value="0.24166666666666667" />
+        <entry key="..\:/Programming/AndroidStudioProjects/TopMovies/app/src/main/res/layout/fragment_favorite.xml" value="0.24166666666666667" />
         <entry key="..\:/Programming/AndroidStudioProjects/TopMovies/app/src/main/res/layout/fragment_home.xml" value="0.24166666666666667" />
         <entry key="..\:/Programming/AndroidStudioProjects/TopMovies/app/src/main/res/layout/fragment_register.xml" value="0.24166666666666667" />
         <entry key="..\:/Programming/AndroidStudioProjects/TopMovies/app/src/main/res/layout/fragment_search.xml" value="0.24166666666666667" />

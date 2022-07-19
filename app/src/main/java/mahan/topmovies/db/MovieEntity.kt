@@ -1,4 +1,4 @@
-package academy.nouri.s1_project.db
+package mahan.topmovies.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

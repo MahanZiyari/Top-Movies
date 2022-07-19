@@ -26,4 +26,9 @@
         <item name="boxStrokeColor">@color/crayola</item>
         <item name="boxBackgroundColor">@color/gunmetal</item>
     </style>
+
+    <style name="RoundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/_10mdp</item>
+    </style>
 </resources>

@@ -1,6 +1,5 @@
 package mahan.topmovies.di
 
-import academy.nouri.s1_project.db.MovieEntity
 import android.content.Context
 import androidx.room.Room
 import dagger.Module
@@ -8,6 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import mahan.topmovies.db.MovieEntity
 import mahan.topmovies.db.MoviesDatabase
 import mahan.topmovies.utils.Constants
 import javax.inject.Singleton
@@ -31,5 +31,5 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideEntity() = MovieEntity()
+    fun provideEntity(): MovieEntity = MovieEntity()
 }

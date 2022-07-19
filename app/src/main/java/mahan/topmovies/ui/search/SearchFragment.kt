@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import mahan.topmovies.databinding.FragmentSearchBinding
+import mahan.topmovies.ui.home.HomeFragmentDirections
 import mahan.topmovies.ui.home.adapters.LastMoviesAdapter
 import mahan.topmovies.utils.initialize
 import mahan.topmovies.utils.showInvisible
@@ -75,6 +77,12 @@ class SearchFragment : Fragment() {
                     emptyItemsLay.showInvisible(false)
                     moviesRecycler.showInvisible(true)
                 }
+            }
+
+            // On Click
+            moviesAdapter.setOnItemClickListener {
+                val direction = HomeFragmentDirections.actionToDefault(it.id!!.toInt())
+                findNavController().navigate(direction)
             }
         }
     }

@@ -1,4 +1,4 @@
-package mahan.topmovies.ui.home.adapters
+package mahan.topmovies.ui.favorite
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,44 +7,41 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import mahan.topmovies.databinding.ItemHomeMoviesLastBinding
-import mahan.topmovies.model.home.ResponseMoviesList.Data
+import mahan.topmovies.db.MovieEntity
 import javax.inject.Inject
 
-class LastMoviesAdapter @Inject constructor() :
-    RecyclerView.Adapter<LastMoviesAdapter.ViewHolder>() {
+class FavoriteAdapter @Inject constructor() : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
     private lateinit var binding: ItemHomeMoviesLastBinding
-    private var movies = emptyList<Data>()
+    private var moviesList = emptyList<MovieEntity>()
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): LastMoviesAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteAdapter.ViewHolder {
         binding =
             ItemHomeMoviesLastBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder()
     }
 
-    override fun onBindViewHolder(holder: LastMoviesAdapter.ViewHolder, position: Int) {
-        holder.bindModelToUi(movies[position])
+    override fun onBindViewHolder(holder: FavoriteAdapter.ViewHolder, position: Int) {
+        holder.bindItems(moviesList[position])
         holder.setIsRecyclable(false)
     }
 
-    override fun getItemCount() = movies.size
+    override fun getItemCount() = moviesList.size
 
     inner class ViewHolder : RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
-        fun bindModelToUi(item: Data) {
+        fun bindItems(item: MovieEntity) {
             binding.apply {
                 movieNameTxt.text = item.title
+                movieRateTxt.text = item.rate
                 movieCountryTxt.text = item.country
                 movieYearTxt.text = item.year
-                movieRateTxt.text = item.imdbRating
                 moviePosterImg.load(item.poster) {
                     crossfade(true)
                     crossfade(800)
                 }
+                //Click
                 root.setOnClickListener {
                     onItemClickListener?.let {
                         it(item)
@@ -54,24 +51,30 @@ class LastMoviesAdapter @Inject constructor() :
         }
     }
 
-    private var onItemClickListener: ((Data) -> Unit)? = null
+    private var onItemClickListener: ((MovieEntity) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (Data) -> Unit) {
+    fun setOnItemClickListener(listener: (MovieEntity) -> Unit) {
         onItemClickListener = listener
     }
 
-    fun submitNewList(movies: List<Data>) {
-        val moviesDiffUtil = MoviesDiffUtil(newItem = movies, oldItem = this.movies)
-        val diffUtil = DiffUtil.calculateDiff(moviesDiffUtil)
-        this.movies = movies
-        diffUtil.dispatchUpdatesTo(this)
+    fun setData(data: List<MovieEntity>) {
+        val moviesDiffUtil = MoviesDiffUtils(moviesList, data)
+        val diffUtils = DiffUtil.calculateDiff(moviesDiffUtil)
+        moviesList = data
+        diffUtils.dispatchUpdatesTo(this)
     }
 
-    class MoviesDiffUtil(private val oldItem: List<Data>, private val newItem: List<Data>) :
-        DiffUtil.Callback() {
-        override fun getOldListSize(): Int = oldItem.size
+    class MoviesDiffUtils(
+        private val oldItem: List<MovieEntity>,
+        private val newItem: List<MovieEntity>,
+    ) : DiffUtil.Callback() {
+        override fun getOldListSize(): Int {
+            return oldItem.size
+        }
 
-        override fun getNewListSize(): Int = newItem.size
+        override fun getNewListSize(): Int {
+            return newItem.size
+        }
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
             return oldItem[oldItemPosition] === newItem[newItemPosition]
@@ -80,6 +83,5 @@ class LastMoviesAdapter @Inject constructor() :
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
             return oldItem[oldItemPosition] === newItem[newItemPosition]
         }
-
     }
 }
